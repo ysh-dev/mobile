@@ -1,0 +1,34 @@
+<ion-view view-title="云商汇" class="ysh-show-top">
+ <ion-tabs class="tabs-calm tabs-top">
+
+  <ion-tab title="新品上市">
+	<ion-content>
+		<ion-list>
+			<ion-item ng-repeat="ad in newAds|orderBy:'id'">
+				<img class="ysh-ad" ng-src="{{ad.pic}}">
+			</ion-item>
+		</ion-list>
+	</ion-content> 
+  </ion-tab>
+	
+  <ion-tab title="热销商品">
+	<ion-content>
+		<ion-list>
+			<ion-item ng-repeat="ad in hotAds|orderBy:'id'">
+				<img class="ysh-ad" ng-src="{{ad.pic}}">
+			</ion-item>
+		</ion-list>
+	</ion-content> 
+  </ion-tab>
+
+  <ion-tab title="代理排名" on-select="loadRanking()">
+	<ion-content>
+	<ion-list>
+      <ion-item ng-repeat="user in users" href="">
+        {{$index + 1}}. <i class="icon ion-person-stalker"></i> {{user.user_name}} (成交数量:{{user.ta_compl}})<i class="icon ion-arrow-up-a"></i>
+      </ion-item>
+    </ion-list>
+	 </ion-content>
+  </ion-tab>
+ </ion-tabs>
+</ion-view>

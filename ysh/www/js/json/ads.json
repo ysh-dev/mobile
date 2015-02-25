@@ -1,0 +1,16 @@
+[
+	{"id" : "ad_01", "pic" : "img/ads/ad_01.jpg", "cate" : "N"},
+	{"id" : "ad_02", "pic" : "img/ads/ad_02.jpg", "cate" : "N"},
+	{"id" : "ad_03", "pic" : "img/ads/ad_03.jpg", "cate" : "H"},
+	{"id" : "ad_04", "pic" : "img/ads/ad_04.jpg", "cate" : "H"},
+	{"id" : "ad_05", "pic" : "img/ads/ad_05.jpg", "cate" : "N"},
+	{"id" : "ad_06", "pic" : "img/ads/ad_06.jpg", "cate" : "H"},
+	{"id" : "ad_07", "pic" : "img/ads/ad_07.jpg", "cate" : "H"},
+	{"id" : "ad_08", "pic" : "img/ads/ad_08.jpg", "cate" : "H"},
+	{"id" : "ad_09", "pic" : "img/ads/ad_09.jpg", "cate" : "N"},
+	{"id" : "ad_10", "pic" : "img/ads/ad_10.jpg", "cate" : "N"},
+	{"id" : "ad_11", "pic" : "img/ads/ad_11.jpg", "cate" : "H"},
+	{"id" : "ad_12", "pic" : "img/ads/ad_12.jpg", "cate" : "H"},
+	{"id" : "ad_13", "pic" : "img/ads/ad_13.jpg", "cate" : "N"},
+	{"id" : "ad_14", "pic" : "img/ads/ad_14.jpg", "cate" : "N"}
+]

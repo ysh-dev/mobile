@@ -1,0 +1,53 @@
+<ion-view>
+	<ion-nav-title>{{currentWare}}</ion-nav-title>
+	<ion-nav-buttons side="right">
+		<button class="button button-icon button-clear ion-share" ng-click="callSharePlugin()"></button>
+	</ion-nav-buttons>
+	<ion-content>
+	<div class="card ysh-ware-card">
+		<div class="item item-image">
+			<ion-slide-box on-slide-changed="disableScolling($index)">
+				<ion-slide ng-repeat="image in images">
+					<div class="ysh-default-image">
+						<img ng-src="{{image}}">
+					</div>
+				</ion-slide>
+			</ion-slide-box>
+		</div>
+		<div class="item item-text-wrap item-divider">
+			<p>商品详细名称</p>
+			<p>商品专柜价格 <span class="ysh-ware-price">￥12</span></p>
+			<div class="ysh-icon ysh-provider-icon"></div>
+			<button class="button button-full button-small button-clear button-dark icon-right ion-chevron-right" ng-click="showCert()">
+				<span class="ysh-small-font">
+					云商汇上线商品均由厂家直接发货，查看
+				</span>
+			</button>
+		</div>
+
+		<div class="item item-text-wrap">
+			<div class="row">
+				<div class="col">产品品牌</div>
+				<div class="col">品牌1</div>
+			</div>
+			<div class="row">
+				<div class="col">规格</div>
+				<div class="col">15 ml</div>
+			</div>
+			<div class="row">
+				<div class="col">产地</div>
+				<div class="col">中国</div>
+			</div>
+		</div>
+		<div class="item item-text-wrap">
+			商品详细描述，目的是让消费者以及代理商充分了解商品
+		</div>
+	</div>
+	</ion-content>
+	<ion-footer-bar>
+		<div class="button-bar">
+				<button class="button button-calm icon ion-bag" ng-click="goCheckout()">我要购买</button>
+				<button class="button button-stable icon ion-person" ng-click="goApply()">我要代理</button>
+		</div>
+	</ion-footer-bar>
+</ion-view>

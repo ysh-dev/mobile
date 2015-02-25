@@ -1,0 +1,13 @@
+[
+	{ "id": "ch_01", "title": "食品", "status": "D"},
+	{ "id": "ch_02", "title": "鞋帽", "status": "D"},	
+	{ "id": "ch_03", "title": "金融", "status": "D"},
+	{ "id": "ch_04", "title": "生活", "status": "A"},	
+	{ "id": "ch_05", "title": "教育", "status": "D"},	
+	{ "id": "ch_06", "title": "居家", "status": "A"},	
+	{ "id": "ch_07", "title": "女装", "status": "A"},	
+	{ "id": "ch_08", "title": "男装", "status": "A"},	
+	{ "id": "ch_09", "title": "亲子", "status": "A"},	
+	{ "id": "ch_10", "title": "美妆", "status": "D"},	
+	{ "id": "ch_11", "title": "票务", "status": "D"}	
+]

@@ -1,0 +1,55 @@
+<ion-view>
+  <ion-nav-title>购物车</ion-nav-title>
+  <ion-content>
+	<div class="card">
+		<div class="item item-divider ">
+			<span>厂商直接发货，100%正品保证</span>
+		</div>
+		<div class="item list">
+			<ion-item ng-repeat="item in checkoutItems" class="ysh-checkout-item">
+						<div class="row" style="padding : 0px">
+							<div class="col col-25">
+								<img ng-src="{{item.pic}}">
+							</div>
+							<div class="col">
+								<div class="row">
+									<div class="col">
+										<h2>{{item.title}}</h2>
+									</div>
+
+									<div class="col col-25">
+										<ysh-price-block orig-price="item.orig_price" index="item.id"/>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col ysh-small-font"><span>{{item.brand}}</span></div>
+								</div>
+								<div class="row">
+									<div class="col ysh-small-font">规格: {{item.norm}}</div>
+									<div class="col">
+											<ysh-amount-counter class="ysh-right" value="amount[item.id]" on-add="doAdd(item.id)" on-reduce="doReduce(item.id)"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="item item-input-inset ysh-code-input" ng-hide="codeAccepted[item.id]">
+							<label class="item-input-wrapper">
+							  <input type="text" ng-model="code[item.id]" placeholder="输入代理商代码，享受代理价格"/>
+							</label>
+							<button class="button button-clear button-small" ng-click="submitCode(item.id)">
+							  提交
+							</button>
+						 </div>
+						 <div class="item item-input-inset ysh-small-font" ng-show="codeAccepted[item.id]">
+							代理商代码提交成功，代理商编号: 003A
+						 </div>
+			<ion-item>
+		</div>
+	</div>
+  </ion-content>
+	<ion-footer-bar>
+		<div class="button-bar hide-on-keyboard-open">
+				<button class="button button-calm" ng-click="showConfirm()">提交订单</button>
+		</div>
+	</ion-footer-bar>
+  </ion-view>

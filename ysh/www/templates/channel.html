@@ -1,0 +1,11 @@
+<ion-view view-title="{{currentChannel}}">
+	<ion-content>
+		<ion-list>
+			<ion-item ng-repeat="brand in brands|orderBy:'title':true" class="item-thumbnail-left"  ng-click="goBrand(brand.id, brand.name)">
+				<img ng-src="{{brand.logo}}" alt="img/logo.png">
+				<h2>{{brand.name}}</h2>
+				<p>{{brand.desc_short}}</p>
+			</ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>
