@@ -2,7 +2,7 @@ ion-view.ysh-show-top ion-list .list{
 	padding-top: 5.75rem;
 }
 
-span.bold {
+span.bold, .tab-title{
 	font-weight: bold;
 }
 
@@ -26,7 +26,7 @@ ion-item  img.ysh-ad{
 }
 
 span.ysh-ware-price {
-	font-size: 1.2rem;
+	font-size: 1rem;
 	font-weight: 500;
 	color: #ed1484;
 }
