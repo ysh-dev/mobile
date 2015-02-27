@@ -87,3 +87,6 @@ span.invalid {
 .ysh-right {
 	float: right;
 }
+.ysh-no-padding{
+	padding: 0px
+}
