@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components'])
+angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ysh.config'])
 
-.controller('AppCtrl', function($ionicModal, $timeout, $scope, channelModelProvider, adModelProvider, userModelProvider) {
-  
+.controller('AppCtrl', function($ionicModal, $timeout, $scope, channelModelProvider, adModelProvider, userModelProvider, default_logo) {
+  $scope.logo = '<img class="ysh-logo" src="' + default_logo + '" />';
   if (!$scope.adsLoaded){
 		$scope.adsLoaded = true;
 		adModelProvider.loadAds().then(function(data) {
@@ -83,8 +83,11 @@ angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components'])
 		$scope.goCheckout = function(){
 			$state.go("app.checkout");
 		};
+		$scope.showDealerTeaser = function(){
+			$state.go("app.dealerteaser");
+		};
 		$scope.goApply = function(){
-			console.info('TODO: start navigation for applying dealership...');
+			$state.go("dealership.survey1");
 		};
 		$scope.callSharePlugin = function(){
 			console.info('TODO: call plugin to share the ware...');
@@ -150,4 +153,9 @@ angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components'])
 			});
 		};
 		
+}])
+.controller('DealershipCtrl', ['$scope', '$state', function($scope, $state){
+		$scope.cancel = function(){
+			$state.go("app.dealerteaser");
+		};
 }]);

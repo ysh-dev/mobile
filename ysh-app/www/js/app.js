@@ -50,17 +50,6 @@ angular.module('ysh', ['ionic', 'ysh.controllers'])
     templateUrl: "templates/menu.html",
     controller: 'AppCtrl'
   })
-
-  .state('app.search', {
-    url: "/search",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/search.html",
-		controller : 'SearchCtrl'
-      }
-    }
-  })
-
   .state('app.main', {
     url: "/main",
     views: {
@@ -68,6 +57,15 @@ angular.module('ysh', ['ionic', 'ysh.controllers'])
         templateUrl: "templates/main.html",
 		controller: 'AppCtrl'
 	  }
+    }
+  })
+  .state('app.search', {
+    url: "/search",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/search.html",
+		controller : 'SearchCtrl'
+      }
     }
   })
   .state('app.channel', {
@@ -88,9 +86,10 @@ angular.module('ysh', ['ionic', 'ysh.controllers'])
 		}
       }
     })
-  .state('app.ware', {
-      url: "/ware/:wId",
-      views: {
+	.state('app.ware', {
+		cache: false,
+		url: "/ware/:wId",
+		views: {
         'menuContent': {
 			templateUrl: "templates/ware.html",
 			controller : 'WareCtrl'
@@ -98,14 +97,40 @@ angular.module('ysh', ['ionic', 'ysh.controllers'])
       }
     })
    .state('app.checkout', {
-      url: "/checkout",
-      views: {
-        'menuContent': {
+		url: "/checkout",
+		views: {
+			'menuContent': {
 			templateUrl: "templates/checkout.html",
 			controller : 'CheckoutCtrl'
 		}
 	 }
-  });
+	})
+	.state('app.dealerteaser', {
+		url: "/dealerteaser",
+		views: {
+			'menuContent': {
+			templateUrl: "templates/dealerteaser.html",
+			controller : 'WareCtrl'
+		}
+	  }
+    })
+	//dealership states
+	.state('dealership', {
+		url: "/dealership",
+		abstract: true,
+		templateUrl: "templates/dealership/survey.html",
+		controller: 'DealershipCtrl'
+	})
+	.state('dealership.survey1', {
+      url: "/survey1",
+      views: {
+        'surveyContent': {
+			templateUrl: "templates/dealership/survey1.html",
+			controller : 'DealershipCtrl'
+		}
+      }
+    });
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/main');
 });

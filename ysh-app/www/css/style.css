@@ -90,3 +90,6 @@ span.invalid {
 .ysh-no-padding{
 	padding: 0px
 }
+img.ysh-logo {
+	max-width: 35%;
+}
