@@ -2,8 +2,9 @@ ion-view.ysh-show-top ion-list .list{
 	padding-top: 5.75rem;
 }
 
-span.bold, .tab-title{
-	font-weight: bold;
+span.bold, .tab-title, .bar .title{
+	font-size: 1.1rem;
+	font-weight: bolder;
 }
 
 ion-item  img.ysh-ad{
