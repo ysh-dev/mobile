@@ -7,10 +7,6 @@ span.bold, .tab-title, .bar .title{
 	font-weight: bolder;
 }
 
-.bar .title.header-item{
-	text-align:center;
-}
-
 ion-item  img.ysh-ad{
 	max-width:100%;
 }
