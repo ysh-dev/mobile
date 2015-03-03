@@ -90,6 +90,18 @@ function WareModel($q, wareServiceProvider){
 				deferred.resolve();
 				return deferred.promise;
 			};
+		},
+		waresByTitle : [],
+		findWaresByTitle : function(title){
+			return wareServiceProvider.findWaresByTitle(title).then(function(response){
+				wareModel.waresByTitle =  response.data;
+			});
+		},
+		wareById : {},
+		findWareById : function(id){
+			return wareServiceProvider.getWareById(id).then(function(response){
+				wareModel.wareById = response.data[0];
+			});
 		}
 	}
 	return wareModel;

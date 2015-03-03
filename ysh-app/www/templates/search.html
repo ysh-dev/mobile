@@ -2,13 +2,13 @@
 	<div class="bar bar-header item-input-inset">
 		<label class="item-input-wrapper">
 			<i class="icon ion-search placeholder-icon"></i>
-			<input type="search" placeholder="Search" ng-model="key">
+			<input type="search" placeholder="商品名称" ng-model="search.key">
 		</label>
-		<button class="button button-clear" >Cancel</button>
+		<button class="button button-clear" ng-click="search()">查找</button>
 	</div>
 	<ion-list>
-      <ion-item nav-clear menu-close ng-repeat="merch in merchandises | searchFilter:key" ui-sref="app.browse">
-        <span>{{merch.title}}</span>
+      <ion-item nav-clear menu-close ng-repeat="hit in hitlist" ui-sref="app.ware({wId:hit.id})">
+        <span>{{hit.title}}</span>
       </ion-item>
     </ion-list>
 </div>

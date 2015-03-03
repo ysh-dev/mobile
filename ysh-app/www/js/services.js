@@ -49,9 +49,20 @@ function WareService($http, service_url){
 	this.url = service_url + 'wares/';
 	
 	this.getWaresByBrand = function(brandId){
-		var _url = this.url + 'brand/' + brandId;
+		var _url = this.url + 'brand/' + brandId + '/';
 		return $http.get(_url);
-	}
+	};
+
+	this.getWareById = function(id){
+		var _url = this.url + id + '/';
+		return $http.get(_url);
+	};
+
+	this.findWaresByTitle = function(title) {
+		var _url = this.url + 'search/' + title + '/';
+		return $http.get(_url);
+	} 
+	
 }
 
 function UserService($http, service_url, default_user_rank){

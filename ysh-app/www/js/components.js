@@ -35,8 +35,8 @@ angular.module('ysh.components', ['ysh.utils'])
 			index : '='
 		},
 		template: '<div class="ysh-price-block">' + 
-					'<span class="original ysh-ware-price ysh-right">{{origPrice|currency}}</span>' +
-					'<span class="reduced ysh-right" ng-show="enabled">{{redPrice|currency}}</span>' +
+					'<span class="original ysh-ware-price ysh-right">￥{{origPrice}}</span>' +
+					'<span class="reduced ysh-right" ng-show="enabled">￥{{redPrice}}</span>' +
 					'</div>',
 		link : function(scope, element, attrs){
 			scope.enabled = false;

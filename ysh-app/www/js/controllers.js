@@ -2,7 +2,7 @@
 
 angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ysh.config'])
 
-.controller('AppCtrl', function($ionicModal, $timeout, $scope, channelModelProvider, adModelProvider, userModelProvider, default_logo) {
+.controller('AppCtrl', ['$ionicModal', '$scope', 'channelModelProvider', 'adModelProvider', 'userModelProvider', 'wareModelProvider', 'default_logo', function($ionicModal, $scope, channelModelProvider, adModelProvider, userModelProvider, wareModelProvider, default_logo) {
   $scope.logo = '<img class="ysh-logo" src="' + default_logo + '" />';
   if (!$scope.adsLoaded){
 		$scope.adsLoaded = true;
@@ -25,8 +25,17 @@ angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ys
 	  });
   };
   
-})
-
+  $scope.toggleSearch = function(){
+		$scope.hitlist = [];
+		$scope.search.key = '';
+  };
+  $scope.search = function(){
+	wareModelProvider.findWaresByTitle($scope.search.key).then(function(data){
+		$scope.hitlist = wareModelProvider.waresByTitle;
+	});
+  };
+  
+}])
 .controller('ChannelCtrl', ['$scope','$state','$stateParams','brandModelProvider','sessionProvider',function($scope,$state,$stateParams,brandModelProvider,session){
 		
 		var selChannel = $stateParams.cId;
@@ -51,8 +60,7 @@ angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ys
 			$state.go("app.brand",{"bId" : brandId});
 		};
 }])
-
-.controller('BrandCtrl', ['$scope', '$state','$stateParams','wareModelProvider','sessionProvider',function($scope, $state, $stateParams, wareModel, session){
+.controller('BrandCtrl', ['$scope', '$state','$stateParams','wareModelProvider','sessionProvider', function($scope, $state, $stateParams, wareModel, session){
 		var selBrand = $stateParams.bId;
 		if (session.get('current_brand')){
 			$scope.currentBrand = JSON.parse(session.get('current_brand'))[selBrand];
@@ -61,9 +69,6 @@ angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ys
 			$scope.wares = wareModel.waresByBrand[selBrand];
 		});
 		$scope.goWare = function(wareId, title){
-			var curWare = {};
-			curWare[wareId] = title;
-			session.put('current_ware', curWare);
 			$state.go("app.ware",{"wId" : wareId});
 		};
 		$scope.doRefresh = function() {
@@ -71,12 +76,14 @@ angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ys
 			$scope.$broadcast('scroll.refreshComplete');
 		}; 
 }])
-.controller('WareCtrl', ['$scope', '$state', '$stateParams', 'wareModelProvider', 'sessionProvider', '$ionicScrollDelegate', function($scope, $state, $stateParams, wareModelProvider, session, $ionicScrollDelegate){
-		var selWare = $stateParams.wId;
-		$scope.currentWare = JSON.parse(session.get('current_ware'))[selWare];
-		
-		//TODO: load ware data from backend;
-		
+.controller('WareCtrl', ['$scope', '$state', '$stateParams', 'wareModelProvider', '$ionicScrollDelegate', function($scope, $state, $stateParams, wareModel, $ionicScrollDelegate){
+		var selWare;
+		if (selWare = $stateParams.wId){
+			wareModel.findWareById(selWare).then(function(data){
+				$scope.ware = wareModel.wareById;
+				$scope.title = $scope.ware.title;
+			});			
+		}
 		$scope.showCert = function(){
 			console.info('TODO: show cetification...');
 		}

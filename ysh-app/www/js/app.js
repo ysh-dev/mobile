@@ -59,15 +59,6 @@ angular.module('ysh', ['ionic', 'ysh.controllers'])
 	  }
     }
   })
-  .state('app.search', {
-    url: "/search",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/search.html",
-		controller : 'SearchCtrl'
-      }
-    }
-  })
   .state('app.channel', {
       url: "/channel/:cId",
       views: {
@@ -87,7 +78,7 @@ angular.module('ysh', ['ionic', 'ysh.controllers'])
       }
     })
 	.state('app.ware', {
-		cache: false,
+		cache: true,
 		url: "/ware/:wId",
 		views: {
         'menuContent': {
