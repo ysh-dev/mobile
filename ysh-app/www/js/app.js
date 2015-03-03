@@ -78,7 +78,7 @@ angular.module('ysh', ['ionic', 'ysh.controllers'])
       }
     })
 	.state('app.ware', {
-		cache: true,
+		cache: false,
 		url: "/ware/:wId",
 		views: {
         'menuContent': {
