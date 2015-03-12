@@ -1,15 +1,11 @@
 <ion-view>
 	<ion-nav-title>{{currentBrand}}</ion-nav-title>
-	<ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-search" menu-toggle="right">
-		</button>
-    </ion-nav-buttons>
 	<ion-content>
 		<ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
 		</ion-refresher>
 		<ion-list>
 			<ion-item ng-repeat="ware in wares|orderBy:'title':false" class="item-thumbnail-right ysh-ware-item" ng-click="goWare(ware.id, ware.title)">
-				<div class="ysh-default-image">
+				<div class="ysh-image">
 					<img ng-src="{{ware.pic}}">
 				</div>
 				<h>{{ware.title}}</h>

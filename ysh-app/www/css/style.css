@@ -36,7 +36,8 @@ span.invalid {
 }
 .ysh-ware-card img{
 	max-width: 90%;
-	margin-bottom: 1rem;
+	margin-bottom: .5rem;
+	margin-top: .5rem;
 }
 .ysh-ware-card .item-image p{
 	text-align:left;
@@ -46,12 +47,7 @@ span.invalid {
 .ysh-ware-card .item-text-wrap{
 	font-size : .9rem;
 }
-.ysh-default-image{
-	background-image: url(../img/default.png);
-	background-repeat: no-repeat;
-	background-position: center;
-}
-.ysh-default-image img{
+.ysh-image img{
 	border: solid;
 	border-color: #ddd;
 	border-width: 1px;
@@ -91,4 +87,23 @@ span.invalid {
 }
 img.ysh-logo {
 	max-width: 35%;
+}
+
+.ysh-overlay-controls{
+	z-index: 1000;
+	position: fixed;
+	left: .2rem;
+	bottom: .2rem;
+	width: 8rem;
+	vertical-align: middle;
+	text-align: center;
+	line-height: 1.0rem;
+	color: white;
+	background-color: #000;
+	opacity: 0.7;
+	border-radius: 15px
+}
+.ysh-overlay-controls button.button{
+	min-width: 40px;
+	min-height: 40px;
 }

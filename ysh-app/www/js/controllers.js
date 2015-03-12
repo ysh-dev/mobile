@@ -2,8 +2,20 @@
 
 angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ysh.config'])
 
-.controller('AppCtrl', ['$ionicModal', '$scope', 'channelModelProvider', 'adModelProvider', 'userModelProvider', 'wareModelProvider', 'default_logo', function($ionicModal, $scope, channelModelProvider, adModelProvider, userModelProvider, wareModelProvider, default_logo) {
-  $scope.logo = '<img class="ysh-logo" src="' + default_logo + '" />';
+
+.controller('AppCtrl', ['$ionicModal', '$scope', 'channelModelProvider', 'adModelProvider', 'userModelProvider', 'wareModelProvider', '$ionicHistory', 'default_logo', '$rootScope', '$state', '$ionicLoading', 'sessionProvider', function($ionicModal, $scope, channelModelProvider, adModelProvider, userModelProvider, wareModelProvider, $ionicHistory, default_logo, $rootScope, $state, $ionicLoading, session) {
+  
+  $rootScope.goBack = function(){
+	  $ionicHistory.goBack();
+  };
+  $scope.logo = default_logo;
+  $scope.showDetail = function(id){
+	  $ionicLoading.show({
+		template: 'Loading...'
+	  });
+	  $rootScope.callByMain = true;
+	  $state.go("app.ware", {"wId" : id});
+  }
   if (!$scope.adsLoaded){
 		$scope.adsLoaded = true;
 		adModelProvider.loadAds().then(function(data) {
@@ -25,16 +37,32 @@ angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ys
 	  });
   };
   
-  $scope.toggleSearch = function(){
-		$scope.hitlist = [];
-		$scope.search.key = '';
+  //initialize search modal
+  $ionicModal.fromTemplateUrl('templates/search.html', {
+		scope: $scope
+  }).then(function(modal) {
+		$scope.modal = modal;
+  });
+  $scope.search = {};
+  $scope.closeSearch = function(){
+	  $scope.search.key = '';
+	  $scope.modal.hide();
+  }
+  
+  $scope.openSearch = function(){
+	$scope.modal.show(); 
+	$scope.hitlist = [];
   };
-  $scope.search = function(){
+  
+  $scope.doSearch = function(){
+	$ionicLoading.show({
+		template: 'Searching...'
+	});
 	wareModelProvider.findWaresByTitle($scope.search.key).then(function(data){
+		$ionicLoading.hide();
 		$scope.hitlist = wareModelProvider.waresByTitle;
 	});
   };
-  
 }])
 .controller('ChannelCtrl', ['$scope','$state','$stateParams','brandModelProvider','sessionProvider',function($scope,$state,$stateParams,brandModelProvider,session){
 		
@@ -76,13 +104,23 @@ angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ys
 			$scope.$broadcast('scroll.refreshComplete');
 		}; 
 }])
-.controller('WareCtrl', ['$scope', '$state', '$stateParams', 'wareModelProvider', '$ionicScrollDelegate', function($scope, $state, $stateParams, wareModel, $ionicScrollDelegate){
+.controller('WareCtrl', ['$scope', '$state', '$stateParams', 'wareModelProvider', '$ionicScrollDelegate', '$rootScope', '$ionicHistory', '$ionicLoading', function($scope, $state, $stateParams, wareModel, $ionicScrollDelegate, $rootScope, $ionicHistory, $ionicLoading){
+		$scope.showBackButton = !$ionicHistory.backView();
+		$rootScope.goBack = function(){
+			if (!$ionicHistory.backView() || $rootScope.callByMain){				
+				$rootScope.callByMain = undefined;
+				$state.go('app.main');
+			}else{
+				$ionicHistory.goBack();
+			}
+		};
 		var selWare;
 		if (selWare = $stateParams.wId){
 			wareModel.findWareById(selWare).then(function(data){
 				$scope.ware = wareModel.wareById;
 				$scope.title = $scope.ware.title;
-			});			
+				$ionicLoading.hide();
+			});	
 		}
 		$scope.showCert = function(){
 			console.info('TODO: show cetification...');

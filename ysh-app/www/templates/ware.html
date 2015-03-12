@@ -1,5 +1,8 @@
 <ion-view>
 	<ion-nav-title>{{title}}</ion-nav-title>
+	<ion-nav-buttons side="left">
+		<button ng-if="showBackButton" class="button button-clear" ng-click="goBack()()">返回</button>
+	</ion-nav-buttons>
 	<ion-nav-buttons side="right">
 		<button class="button button-icon button-clear ion-share" ng-click="callSharePlugin()"></button>
 	</ion-nav-buttons>
@@ -8,7 +11,7 @@
 		<div class="item item-image">
 			<ion-slide-box on-slide-changed="disableScolling($index)">
 				<ion-slide ng-repeat="image in images">
-					<div class="ysh-default-image">
+					<div class="ysh-image">
 						<img ng-src="{{image}}">
 					</div>
 				</ion-slide>

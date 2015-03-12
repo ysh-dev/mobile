@@ -5,7 +5,9 @@
 	<ion-content lazy-scroll>
 		<ion-list>
 			<ion-item ng-repeat="ad in newAds|orderBy:'id'">
-				<img class="ysh-ad" image-lazy-src="{{ad.pic}}" ng-src="img/ad_default.png">
+				<div ng-click="showDetail('w_01')">
+					<img class="ysh-ad" image-lazy-src="{{ad.pic}}" ng-src="img/ad_default.png">
+				</div>
 			</ion-item>
 		</ion-list>
 	</ion-content> 
@@ -15,7 +17,9 @@
 	<ion-content lazy-scroll>
 		<ion-list>
 			<ion-item ng-repeat="ad in hotAds|orderBy:'id'">
-				<img class="ysh-ad" image-lazy-src="{{ad.pic}}" ng-src="img/ad_default.png">
+				<div ng-click="showDetail('w_01')">
+					<img class="ysh-ad" image-lazy-src="{{ad.pic}}" ng-src="img/ad_default.png">
+				</div>
 			</ion-item>
 		</ion-list>
 	</ion-content> 

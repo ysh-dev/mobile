@@ -3,9 +3,15 @@
 
 angular.module('ysh.components', ['ysh.utils'])
 
-.directive('searchPanel', function(){
+.directive('yshOverlayControls', function(){
 	return{
-		templateUrl: 'templates/search.html'
+		restrict: 'E',
+		replace: true,
+		template : 	'<div class="ysh-overlay-controls">' + 
+					'<button class="button button-clear icon ion-search" ng-click="openSearch()">' +
+					'<button class="button button-clear icon ion-person" ng-click="login()">' +
+					'<button class="button button-clear icon ion-bag">' +
+					'</div>'
 	}
 })
 .directive('yshAmountCounter', function($compile){

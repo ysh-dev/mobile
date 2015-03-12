@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ysh', ['ionic', 'ysh.controllers'])
+angular.module('ysh', ['ionic', 'ysh.controllers', 'ysh.models'])
 
 .run(function($ionicPlatform, $ionicModal, $rootScope, $log, sessionProvider) {
   $ionicPlatform.ready(function() {
@@ -77,7 +77,7 @@ angular.module('ysh', ['ionic', 'ysh.controllers'])
 		}
       }
     })
-	.state('app.ware', {
+  .state('app.ware', {
 		cache: false,
 		url: "/ware/:wId",
 		views: {
@@ -86,7 +86,7 @@ angular.module('ysh', ['ionic', 'ysh.controllers'])
 			controller : 'WareCtrl'
 		}
       }
-    })
+   })
    .state('app.checkout', {
 		url: "/checkout",
 		views: {
