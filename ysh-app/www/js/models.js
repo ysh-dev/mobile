@@ -7,7 +7,7 @@ angular.module('ysh.models', ['ysh.services'])
 .factory('adModelProvider',['adServiceProvider', AdModel])
 .factory('brandModelProvider',['brandServiceProvider', BrandModel])
 .factory('wareModelProvider', ['$q', 'wareServiceProvider', WareModel])
-.factory('userModelProvider', ['$q', 'userServiceProvider', UserModel]);
+.factory('memberModelProvider', ['$q', 'memberServiceProvider', MemberModel]);
 
 
 function ChannelModel(channelServiceProvider){
@@ -107,13 +107,13 @@ function WareModel($q, wareServiceProvider){
 	return wareModel;
 }
 
-function UserModel($q, userServiceProvider){
-	var userModel = {
-		usersByRank : undefined,
-		loadUsersByRank : function(){
+function MemberModel($q, memberServiceProvider){
+	var memberModel = {
+		dealersByRank : undefined,
+		loadDealersByRank : function(){
 			if (!this.usersByRank){
-				return userServiceProvider.getUsersByRank(10).then(function(response){
-					userModel.usersByRank = response.data;
+				return memberServiceProvider.getDealersByRank(10).then(function(response){
+					memberModel.dealersByRank = response.data;
 				});
 			}else{
 				var deferred = $q.defer();
@@ -122,7 +122,7 @@ function UserModel($q, userServiceProvider){
 			}
 		}
 	}
-	return userModel;
+	return memberModel;
 }
 
 function CartModel(){

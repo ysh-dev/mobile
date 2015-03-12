@@ -1,10 +1,11 @@
 'use strict';
 
-angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ysh.config'])
+angular.module('ysh.controllers.main', ['ysh.utils','ysh.models','ysh.components','ysh.config'])
 
 
-.controller('AppCtrl', ['$ionicModal', '$scope', 'channelModelProvider', 'adModelProvider', 'userModelProvider', 'wareModelProvider', '$ionicHistory', 'default_logo', '$rootScope', '$state', '$ionicLoading', 'sessionProvider', function($ionicModal, $scope, channelModelProvider, adModelProvider, userModelProvider, wareModelProvider, $ionicHistory, default_logo, $rootScope, $state, $ionicLoading, session) {
+.controller('AppCtrl', ['$ionicModal', '$scope', 'channelModelProvider', 'adModelProvider', 'memberModelProvider', 'wareModelProvider', '$ionicHistory', 'default_logo', '$rootScope', '$state', '$ionicLoading', 'sessionProvider', function($ionicModal, $scope, channelModelProvider, adModelProvider, memberModelProvider, wareModelProvider, $ionicHistory, default_logo, $rootScope, $state, $ionicLoading, session) {
   
+  $rootScope.showControls = true;
   $rootScope.goBack = function(){
 	  $ionicHistory.goBack();
   };
@@ -32,8 +33,8 @@ angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ys
    };
    
   $scope.loadRanking = function(){
-	  userModelProvider.loadUsersByRank().then(function(data){		  
-		$scope.users = userModelProvider.usersByRank;
+	  memberModelProvider.loadDealersByRank().then(function(data){		  
+		$scope.dealers = memberModelProvider.dealersByRank;
 	  });
   };
   
@@ -64,8 +65,7 @@ angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ys
 	});
   };
 }])
-.controller('ChannelCtrl', ['$scope','$state','$stateParams','brandModelProvider','sessionProvider',function($scope,$state,$stateParams,brandModelProvider,session){
-		
+.controller('ChannelCtrl', ['$scope','$rootScope','$state','$stateParams','brandModelProvider','sessionProvider',function($scope, $rootScope, $state, $stateParams,brandModelProvider,session){
 		var selChannel = $stateParams.cId;
 		
 		if ($scope.channels){	
@@ -88,7 +88,7 @@ angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ys
 			$state.go("app.brand",{"bId" : brandId});
 		};
 }])
-.controller('BrandCtrl', ['$scope', '$state','$stateParams','wareModelProvider','sessionProvider', function($scope, $state, $stateParams, wareModel, session){
+.controller('BrandCtrl', ['$scope', '$rootScope', '$state','$stateParams','wareModelProvider','sessionProvider', function($scope, $rootScope, $state, $stateParams, wareModel, session){
 		var selBrand = $stateParams.bId;
 		if (session.get('current_brand')){
 			$scope.currentBrand = JSON.parse(session.get('current_brand'))[selBrand];
@@ -105,6 +105,7 @@ angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ys
 		}; 
 }])
 .controller('WareCtrl', ['$scope', '$state', '$stateParams', 'wareModelProvider', '$ionicScrollDelegate', '$rootScope', '$ionicHistory', '$ionicLoading', function($scope, $state, $stateParams, wareModel, $ionicScrollDelegate, $rootScope, $ionicHistory, $ionicLoading){
+		$rootScope.showControls = false;
 		$scope.showBackButton = !$ionicHistory.backView();
 		$rootScope.goBack = function(){
 			if (!$ionicHistory.backView() || $rootScope.callByMain){				
@@ -113,6 +114,7 @@ angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ys
 			}else{
 				$ionicHistory.goBack();
 			}
+			$rootScope.showControls = true;
 		};
 		var selWare;
 		if (selWare = $stateParams.wId){
@@ -132,7 +134,7 @@ angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ys
 			$state.go("app.dealerteaser");
 		};
 		$scope.goApply = function(){
-			$state.go("dealership.survey1");
+			$state.go("dealer.survey");
 		};
 		$scope.callSharePlugin = function(){
 			console.info('TODO: call plugin to share the ware...');
@@ -199,7 +201,7 @@ angular.module('ysh.controllers', ['ysh.utils','ysh.models','ysh.components','ys
 		};
 		
 }])
-.controller('DealershipCtrl', ['$scope', '$state', function($scope, $state){
+.controller('DealerCtrl', ['$scope', '$state', function($scope, $state){
 		$scope.cancel = function(){
 			$state.go("app.dealerteaser");
 		};

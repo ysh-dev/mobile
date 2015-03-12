@@ -6,7 +6,7 @@ angular.module('ysh.services', ['ysh.config'])
 .service('adServiceProvider', ['$http','service_url', AdService])
 .service('brandServiceProvider', ['$http','service_url', BrandService])
 .service('wareServiceProvider', ['$http','service_url', WareService])
-.service('userServiceProvider', ['$http','service_url','default_user_rank', UserService]);
+.service('memberServiceProvider', ['$http','service_url','default_dealer_rank', MemberService]);
 
 function ChannelService($http, service_url){	
 	//this.url = "js/json/channels.json";
@@ -65,15 +65,15 @@ function WareService($http, service_url){
 	
 }
 
-function UserService($http, service_url, default_user_rank){
+function MemberService($http, service_url, default_dealer_rank){
 	//this.url = "js/json/users.json"
-	this.url = service_url + 'users/';
+	this.url = service_url + 'members/';
 	
-	this.getUsersByRank = function (top){
+	this.getDealersByRank = function (top){
 		if(isNaN(parseInt(top))){
 			top = default_user_rank;
 		};
-		var _url = this.url + 'rank/' + top;
+		var _url = this.url + 'dealers/rank/' + top;
 		return $http.get(_url);
 	};
 }

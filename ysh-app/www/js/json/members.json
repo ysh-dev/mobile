@@ -1,0 +1,22 @@
+[
+    { "name": "用户1", "address" : "河南省 郑州市 金水区", "type" : "01"},
+    { "name": "用户2", "address" : "河南省 郑州市 金水区", "type" : "01"},
+    { "name": "用户3", "address" : "河南省 郑州市 金水区", "type" : "01"},
+    { "name": "用户4", "address" : "河南省 郑州市 金水区", "type" : "01"},
+    { "name": "用户5", "address" : "河南省 郑州市 金水区", "type" : "01"},
+    { "name": "用户6", "address" : "河南省 郑州市 金水区", "type" : "01"},
+	{ "name": "用户7", "address" : "河南省 郑州市 金水区", "type" : "01"},
+    { "name": "用户8", "address" : "河南省 郑州市 金水区", "type" : "01"},
+    { "name": "用户9", "address" : "河南省 郑州市 金水区", "type" : "01"},
+    { "name": "用户10", "address" : "河南省 郑州市 金水区", "type" : "01"},
+    { "name": "代理2", "address" : "河南省 郑州市 金水区", "type" : "11", "d_tokens" : [{"w_01" : "EEDD1123FFAA"},{"w_22" : "EEBB1123CCAA"}], "ta_compl_amount": 10},
+	{ "name": "代理1", "address" : "河南省 郑州市 金水区", "type" : "11", "d_tokens" : [{"w_01" : "EEDD1123FFAA"},{"w_22" : "EEBB1123CCAA"}], "ta_compl_amount": 99},
+    { "name": "代理3", "address" : "河南省 郑州市 金水区", "type" : "11", "d_tokens" : [{"w_01" : "EEDD1123FFAA"},{"w_22" : "EEBB1123CCAA"}], "ta_compl_amount": 1},
+    { "name": "代理4", "address" : "河南省 郑州市 金水区", "type" : "11", "d_tokens" : [{"w_01" : "EEDD1123FFAA"},{"w_22" : "EEBB1123CCAA"}], "ta_compl_amount": 22},
+    { "name": "代理5", "address" : "河南省 郑州市 金水区", "type" : "11", "d_tokens" : [{"w_01" : "EEDD1123FFAA"},{"w_22" : "EEBB1123CCAA"}], "ta_compl_amount": 34},
+    { "name": "代理6", "address" : "河南省 郑州市 金水区", "type" : "11", "d_tokens" : [{"w_01" : "EEDD1123FFAA"},{"w_22" : "EEBB1123CCAA"}], "ta_compl_amount": 109},
+	{ "name": "代理7", "address" : "河南省 郑州市 金水区", "type" : "11", "d_tokens" : [{"w_01" : "EEDD1123FFAA"},{"w_22" : "EEBB1123CCAA"}], "ta_compl_amount": 32},
+    { "name": "代理8", "address" : "河南省 郑州市 金水区", "type" : "11", "d_tokens" : [{"w_01" : "EEDD1123FFAA"},{"w_22" : "EEBB1123CCAA"}], "ta_compl_amount": 23},
+    { "name": "代理9", "address" : "河南省 郑州市 金水区", "type" : "11", "d_tokens" : [{"w_01" : "EEDD1123FFAA"},{"w_22" : "EEBB1123CCAA"}], "ta_compl_amount": 7},
+    { "name": "代理10", "address" : "河南省 郑州市 金水区", "type" : "11", "d_tokens" : [{"w_01" : "EEDD1123FFAA"},{"w_22" : "EEBB1123CCAA"}], "ta_compl_amount": 40}
+]

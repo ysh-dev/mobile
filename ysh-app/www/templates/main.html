@@ -1,7 +1,7 @@
 <ion-view view-title="{{logo}}" class="ysh-show-top">
  <ion-tabs class="tabs-calm tabs-top">
 
-  <ion-tab title="新品上市">
+  <ion-tab title="最新上线">
 	<ion-content lazy-scroll>
 		<ion-list>
 			<ion-item ng-repeat="ad in newAds|orderBy:'id'">
@@ -28,8 +28,8 @@
   <ion-tab title="代理排名" on-select="loadRanking()">
 	<ion-content>
 	<ion-list>
-      <ion-item ng-repeat="user in users" href="">
-        {{$index + 1}}. <i class="icon ion-person-stalker"></i> {{user.user_name}} (成交数量:{{user.ta_compl}})<i class="icon ion-arrow-up-a"></i>
+      <ion-item ng-repeat="dealer in dealers" href="">
+        {{$index + 1}}. <i class="icon ion-person-stalker"></i> {{dealer.name}} (成交金额: ￥{{dealer.ta_compl_amount}})<i class="icon ion-arrow-up-a"></i>
       </ion-item>
     </ion-list>
 	 </ion-content>

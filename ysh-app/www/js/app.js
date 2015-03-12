@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ysh', ['ionic', 'ysh.controllers', 'ysh.models'])
+angular.module('ysh', ['ionic', 'ysh.controllers.main', 'ysh.models'])
 
 .run(function($ionicPlatform, $ionicModal, $rootScope, $log, sessionProvider) {
   $ionicPlatform.ready(function() {
@@ -21,16 +21,23 @@ angular.module('ysh', ['ionic', 'ysh.controllers', 'ysh.models'])
   }).then(function(modal) {
 		$rootScope.modal = modal;
   });
- 
+  
+  $rootScope.toggleLogin = true;//means login
+  
+  $rootScope.showLogin = function(){
+	 $rootScope.toggleLogin = true;
+  };
+  $rootScope.showSignin = function(){
+	 $rootScope.toggleLogin = false;
+  };
   $rootScope.loginData = {};
   
   $rootScope.closeLogin = function() {
 		$rootScope.modal.hide();
   };
   $rootScope.login = function() {
-	if (!sessionProvider.get('credential')){
-		$rootScope.modal.show();
-	} else{
+	$rootScope.modal.show();
+	if (sessionProvider.get('credential')){
 		$log.info('User is already logged in!');
 	}
   };
@@ -106,22 +113,37 @@ angular.module('ysh', ['ionic', 'ysh.controllers', 'ysh.models'])
 	  }
     })
 	//dealership states
-	.state('dealership', {
-		url: "/dealership",
+	.state('dealer', {
+		url: "/dealer",
 		abstract: true,
-		templateUrl: "templates/dealership/survey.html",
-		controller: 'DealershipCtrl'
+		templateUrl: "templates/dealer/main.html",
+		controller: 'DealerCtrl'
 	})
-	.state('dealership.survey1', {
-      url: "/survey1",
+	.state('dealer.survey', {
+      url: "/survey",
       views: {
         'surveyContent': {
-			templateUrl: "templates/dealership/survey1.html",
-			controller : 'DealershipCtrl'
+			templateUrl: "templates/dealer/survey.html",
+			controller : 'DealerCtrl'
+		}
+      }
+    })
+	//user center states
+	.state('member',{
+		url : "member",
+		abstract: true,
+		templateUrl: "templates/member/main.html",
+		controller: 'MemberCtrl'
+	})
+	.state('member.register', {
+      url: "/register",
+      views: {
+        'memberContent': {
+			templateUrl: "templates/member/register.html",
+			controller : 'memberCtrl'
 		}
       }
     });
-
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/main');
 });

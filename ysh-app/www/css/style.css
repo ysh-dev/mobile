@@ -106,4 +106,18 @@ img.ysh-logo {
 .ysh-overlay-controls button.button{
 	min-width: 40px;
 	min-height: 40px;
+	border-width: 0px 1px 0px 1px;
+}
+.ysh-overlay-controls button.button.seperator{
+	border-color: grey;
+}
+.ysh-header-tab{
+	width:50%;
+	margin: 0 auto;
+}
+.ysh-right-buttons{
+	z-index: 10;
+	position: absolute;
+	right: inherit;
+	padding-right: inherit;
 }
