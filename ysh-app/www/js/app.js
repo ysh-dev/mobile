@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('ysh', ['ionic', 'ysh.controllers.main', 'ysh.models'])
+angular.module('ysh', ['ionic', 'ysh.controllers.main', 'ysh.controllers.member', 'ysh.models'])
 
-.run(function($ionicPlatform, $ionicModal, $rootScope, $log, sessionProvider) {
+.run(function($ionicPlatform, $ionicModal, $rootScope, $log, sessionProvider, memberModelProvider) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -14,43 +14,10 @@ angular.module('ysh', ['ionic', 'ysh.controllers.main', 'ysh.models'])
       StatusBar.styleDefault();
     }
   });
-
-  //initialize login modal
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-		scope: $rootScope
-  }).then(function(modal) {
-		$rootScope.modal = modal;
-  });
-  
-  $rootScope.toggleLogin = true;//means login
-  
-  $rootScope.showLogin = function(){
-	 $rootScope.toggleLogin = true;
-  };
-  $rootScope.showSignin = function(){
-	 $rootScope.toggleLogin = false;
-  };
-  $rootScope.loginData = {};
-  
-  $rootScope.closeLogin = function() {
-		$rootScope.modal.hide();
-  };
-  $rootScope.login = function() {
-	$rootScope.modal.show();
-	if (sessionProvider.get('credential')){
-		$log.info('User is already logged in!');
-	}
-  };
-  $rootScope.doLogin = function() {
-	$log.info('Doing login', $rootScope.loginData);
-	sessionProvider.put('credential', $rootScope.loginData);
-	$rootScope.closeLogin();
-  };
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-
   .state('app', {
     url: "/app",
     abstract: true,
@@ -85,16 +52,16 @@ angular.module('ysh', ['ionic', 'ysh.controllers.main', 'ysh.models'])
       }
     })
   .state('app.ware', {
-		cache: false,
 		url: "/ware/:wId",
+		cache: false,
 		views: {
-        'menuContent': {
-			templateUrl: "templates/ware.html",
-			controller : 'WareCtrl'
+			'menuContent': {
+				templateUrl: "templates/ware.html",
+				controller : 'WareCtrl'
+			}
 		}
-      }
-   })
-   .state('app.checkout', {
+  })
+  .state('app.checkout', {
 		url: "/checkout",
 		views: {
 			'menuContent': {
@@ -116,8 +83,7 @@ angular.module('ysh', ['ionic', 'ysh.controllers.main', 'ysh.models'])
 	.state('dealer', {
 		url: "/dealer",
 		abstract: true,
-		templateUrl: "templates/dealer/main.html",
-		controller: 'DealerCtrl'
+		templateUrl: "templates/dealer/main.html"
 	})
 	.state('dealer.survey', {
       url: "/survey",
@@ -133,14 +99,13 @@ angular.module('ysh', ['ionic', 'ysh.controllers.main', 'ysh.models'])
 		url : "member",
 		abstract: true,
 		templateUrl: "templates/member/main.html",
-		controller: 'MemberCtrl'
 	})
-	.state('member.register', {
-      url: "/register",
+	.state('member.login', {
+      url: "/login",
       views: {
         'memberContent': {
-			templateUrl: "templates/member/register.html",
-			controller : 'memberCtrl'
+			templateUrl: "templates/member/login.html",
+			controller : 'MemberCtrl'
 		}
       }
     });

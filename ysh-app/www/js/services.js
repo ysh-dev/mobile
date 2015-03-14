@@ -76,4 +76,13 @@ function MemberService($http, service_url, default_dealer_rank){
 		var _url = this.url + 'dealers/rank/' + top;
 		return $http.get(_url);
 	};
+	this.login = function(username, password){
+		var _url = this.url + 'account/login?name=' + username + '&pass=' + password;
+		return $http.get(_url);
+	};
+	this.signin = function(username, password){
+		var _url = this.url + 'account/';
+		var payload = $.param({"name" : username, "pass" : password});
+		return $http.post(_url, payload);
+	};
 }

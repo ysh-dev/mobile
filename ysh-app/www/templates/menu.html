@@ -1,7 +1,7 @@
 <ion-side-menus enable-menu-with-back-views="false">
   <ion-side-menu-content>
     <ion-nav-bar class="bar-stable" align-title="center">
-      <ion-nav-back-button ng-click="goBack()">
+      <ion-nav-back-button>
 		返回
       </ion-nav-back-button>
 
@@ -25,13 +25,13 @@
     <ion-content>
       <ion-list>
 		<ion-item nav-clear menu-close ui-sref="app.main">
-          首页
+          <span class="ysh-bold-font">首页</span>
         </ion-item>
 		<ion-item nav-clear menu-close ng-repeat="channel in channels" ui-sref="app.channel({cId:channel.id})">
-			<span class="bold">{{channel.title}}</span>
+			<span class="ysh-bold-font">{{channel.title}}</span>
 		</ion-item>
-        <ion-item nav-clear menu-close ng-click="login()">
-          我的
+        <ion-item nav-clear menu-close ui-sref="member.login">
+          <span class="ysh-bold-font">我的</span>
         </ion-item>
       </ion-list>
     </ion-content>

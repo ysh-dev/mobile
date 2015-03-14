@@ -1,14 +1,6 @@
-ion-view.ysh-show-top ion-list .list{
-	padding-top: 5.75rem;
-}
-
-span.bold, .tab-title, .bar .title{
-	font-size: 1.1rem;
+.ysh-bold-font, .ysh-bold-font.ysh-tab.button{
 	font-weight: bolder;
-}
-
-ion-item  img.ysh-ad{
-	max-width:100%;
+	font-size: 1.2rem;
 }
 
 .item-thumbnail-right.ysh-ware-item{
@@ -34,6 +26,7 @@ span.ysh-ware-price {
 span.invalid {
 	 text-decoration:line-through;
 }
+
 .ysh-ware-card img{
 	max-width: 90%;
 	margin-bottom: .5rem;
@@ -86,38 +79,36 @@ span.invalid {
 	padding: 0px
 }
 img.ysh-logo {
-	max-width: 35%;
+	max-height : 100%;
+	vertical-align: middle;
 }
-
 .ysh-overlay-controls{
 	z-index: 1000;
 	position: fixed;
-	left: .2rem;
-	bottom: .2rem;
+	right: -2.5rem;
+	bottom: 3rem;
 	width: 8rem;
 	vertical-align: middle;
 	text-align: center;
 	line-height: 1.0rem;
 	color: white;
 	background-color: #000;
-	opacity: 0.7;
-	border-radius: 15px
+	opacity: 0.6;
+	border-radius: 15px;
+	-webkit-transform:rotate(90deg);
+	-moz-transform:rotate(90deg);
 }
 .ysh-overlay-controls button.button{
 	min-width: 40px;
 	min-height: 40px;
-	border-width: 0px 1px 0px 1px;
+	border-width: 1px 0px 1px 0px;
+	-webkit-transform:rotate(270deg);
+	-moz-transform:rotate(270deg);
 }
 .ysh-overlay-controls button.button.seperator{
 	border-color: grey;
 }
 .ysh-header-tab{
-	width:50%;
+	width:70%;
 	margin: 0 auto;
-}
-.ysh-right-buttons{
-	z-index: 10;
-	position: absolute;
-	right: inherit;
-	padding-right: inherit;
 }

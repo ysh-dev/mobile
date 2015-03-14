@@ -9,7 +9,7 @@ angular.module('ysh.components', ['ysh.utils'])
 		replace: true,
 		template : 	'<div class="ysh-overlay-controls">' + 
 					'<button class="button button-clear icon ion-search" ng-click="openSearch()">' +
-					'<button class="button button-clear seperator icon ion-person" ng-click="login()">' +
+					'<button class="button button-clear seperator icon ion-person" ui-sref="member.login">' +
 					'<button class="button button-clear icon ion-bag">' +
 					'</div>'
 	}

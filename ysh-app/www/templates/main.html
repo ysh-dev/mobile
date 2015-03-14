@@ -1,38 +1,36 @@
-<ion-view view-title="{{logo}}" class="ysh-show-top">
- <ion-tabs class="tabs-calm tabs-top">
-
-  <ion-tab title="最新上线">
-	<ion-content lazy-scroll>
+<ion-view view-title="{{logo}}">
+  <ion-header-bar class="bar-calm bar-subheader">
+		<div class="button-bar">
+			<a class="button button-clear ysh-tab" ng-class="{'ysh-bold-font' : toggleStatus == 'newlist'}" ng-click="toggleNewlist()">最新上线</a>
+			<a class="button button-clear ysh-tab" ng-class="{'ysh-bold-font' : toggleStatus == 'hotlist'}" ng-click="toggleHotlist()">热销商品</a>
+			<a class="button button-clear ysh-tab" ng-class="{'ysh-bold-font' : toggleStatus == 'ranking'}" ng-click="toggleRanking()">代理排名</a>
+		</div>
+  </ion-header-bar>
+  <ion-content lazy-scroll>
+	<div id="newlist" ng-if="toggleStatus == 'newlist'">
 		<ion-list>
 			<ion-item ng-repeat="ad in newAds|orderBy:'id'">
 				<div ng-click="showDetail('w_01')">
-					<img class="ysh-ad" image-lazy-src="{{ad.pic}}" ng-src="img/ad_default.png">
+					<img style="max-width:100%;" image-lazy-src="{{ad.pic}}" ng-src="img/ad_default.png">
 				</div>
 			</ion-item>
 		</ion-list>
-	</ion-content> 
-  </ion-tab>
-	
-  <ion-tab title="热销商品">
-	<ion-content lazy-scroll>
+	</div>
+	<div id="hotlist" ng-if="toggleStatus == 'hotlist'">
 		<ion-list>
 			<ion-item ng-repeat="ad in hotAds|orderBy:'id'">
 				<div ng-click="showDetail('w_01')">
-					<img class="ysh-ad" image-lazy-src="{{ad.pic}}" ng-src="img/ad_default.png">
+					<img style="max-width:100%;" image-lazy-src="{{ad.pic}}" ng-src="img/ad_default.png">
 				</div>
 			</ion-item>
 		</ion-list>
-	</ion-content> 
-  </ion-tab>
-
-  <ion-tab title="代理排名" on-select="loadRanking()">
-	<ion-content>
-	<ion-list>
-      <ion-item ng-repeat="dealer in dealers" href="">
-        {{$index + 1}}. <i class="icon ion-person-stalker"></i> {{dealer.name}} (成交金额: ￥{{dealer.ta_compl_amount}})<i class="icon ion-arrow-up-a"></i>
-      </ion-item>
-    </ion-list>
-	 </ion-content>
-  </ion-tab>
- </ion-tabs>
+	</div>
+	<div id="ranking" ng-if="toggleStatus == 'ranking'">
+		<ion-list>
+			<ion-item ng-repeat="dealer in dealers" href="">
+				{{$index + 1}}. <i class="icon ion-person-stalker"></i> {{dealer.name}} (成交金额: ￥{{dealer.ta_compl_amount}})<i class="icon ion-arrow-up-a"></i>
+			</ion-item>
+		</ion-list>
+	</div>
+  </ion-content>
 </ion-view>

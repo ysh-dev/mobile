@@ -4,12 +4,8 @@ angular.module('ysh.controllers.main', ['ysh.utils','ysh.models','ysh.components
 
 
 .controller('AppCtrl', ['$ionicModal', '$scope', 'channelModelProvider', 'adModelProvider', 'memberModelProvider', 'wareModelProvider', '$ionicHistory', 'default_logo', '$rootScope', '$state', '$ionicLoading', 'sessionProvider', function($ionicModal, $scope, channelModelProvider, adModelProvider, memberModelProvider, wareModelProvider, $ionicHistory, default_logo, $rootScope, $state, $ionicLoading, session) {
-  
   $rootScope.showControls = true;
-  $rootScope.goBack = function(){
-	  $ionicHistory.goBack();
-  };
-  $scope.logo = default_logo;
+  $rootScope.logo = default_logo;
   $scope.showDetail = function(id){
 	  $ionicLoading.show({
 		template: 'Loading...'
@@ -17,6 +13,23 @@ angular.module('ysh.controllers.main', ['ysh.utils','ysh.models','ysh.components
 	  $rootScope.callByMain = true;
 	  $state.go("app.ware", {"wId" : id});
   }
+  $scope.toggleStatus = 'newlist';
+  
+  $scope.toggleNewlist = function(){
+	$scope.toggleStatus = 'newlist';
+  }
+  
+  $scope.toggleHotlist = function(){
+	$scope.toggleStatus = 'hotlist';
+  }
+  
+  $scope.toggleRanking = function(){
+	memberModelProvider.loadDealersByRank().then(function(data){		  
+		$scope.dealers = memberModelProvider.dealersByRank;
+	});
+	$scope.toggleStatus = 'ranking';
+  } 
+  
   if (!$scope.adsLoaded){
 		$scope.adsLoaded = true;
 		adModelProvider.loadAds().then(function(data) {
@@ -24,19 +37,13 @@ angular.module('ysh.controllers.main', ['ysh.utils','ysh.models','ysh.components
 			$scope.hotAds = adModelProvider.hotAds;
 		});
   }
-  
+	
   if (!$scope.channelLoaded){		
 		$scope.channelLoaded = true;
 		channelModelProvider.loadChannels().then(function(data) {
 			$scope.channels = channelModelProvider.channels;
 		});
-   };
-   
-  $scope.loadRanking = function(){
-	  memberModelProvider.loadDealersByRank().then(function(data){		  
-		$scope.dealers = memberModelProvider.dealersByRank;
-	  });
-  };
+  }; 
   
   //initialize search modal
   $ionicModal.fromTemplateUrl('templates/search.html', {
@@ -105,17 +112,6 @@ angular.module('ysh.controllers.main', ['ysh.utils','ysh.models','ysh.components
 		}; 
 }])
 .controller('WareCtrl', ['$scope', '$state', '$stateParams', 'wareModelProvider', '$ionicScrollDelegate', '$rootScope', '$ionicHistory', '$ionicLoading', function($scope, $state, $stateParams, wareModel, $ionicScrollDelegate, $rootScope, $ionicHistory, $ionicLoading){
-		$rootScope.showControls = false;
-		$scope.showBackButton = !$ionicHistory.backView();
-		$rootScope.goBack = function(){
-			if (!$ionicHistory.backView() || $rootScope.callByMain){				
-				$rootScope.callByMain = undefined;
-				$state.go('app.main');
-			}else{
-				$ionicHistory.goBack();
-			}
-			$rootScope.showControls = true;
-		};
 		var selWare;
 		if (selWare = $stateParams.wId){
 			wareModel.findWareById(selWare).then(function(data){

@@ -120,6 +120,26 @@ function MemberModel($q, memberServiceProvider){
 				deferred.resolve();
 				return deferred.promise;
 			}
+		},
+		loginStatus : false,
+		login : function(username, password){
+			return memberServiceProvider.login(username, password).then(function(response){
+				if (response.data.status == 0){
+					memberModel.loginStatus = true;
+				}else{
+					memberModel.loginStatus = false;
+				}
+			});
+		},
+		signinStatus : false,
+		signin : function(username, password){
+			return memberServiceProvider.signin(username, password).then(function(response){
+				if (response.data.status == 0){
+					memberModel.signinStatus = true;
+				}else{
+					memberModel.signinStatus = false;
+				}
+			});
 		}
 	}
 	return memberModel;
