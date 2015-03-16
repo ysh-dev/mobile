@@ -1,16 +1,9 @@
-<ion-view view-title="个人中心">
-   <ion-nav-buttons side="right">
-        <button class="button button-clear" ng-click="close()">
-			关闭
-		</button>
-   </ion-nav-buttons>
-   <ion-header-bar class="bar-stable bar-subheader">
-	<div class="ysh-header-tab">
-		<div class="button-bar">
+ <ion-modal-view>
+  <ion-header-bar class="bar-stable bar-calm">
+		<div class="button-bar ysh-header-tab">
 			<a class="button" ng-class="{'button-calm' : toggleLogin}" ng-click="showLogin()">登录</a>
 			<a class="button" ng-class="{'button-positive' : !toggleLogin}" ng-click="showSignin()">注册</a>
 		</div>
-	</div>
   </ion-header-bar>
   <ion-content>
 	<div id="login" ng-if="toggleLogin">
@@ -48,4 +41,4 @@
 		</form>	
 	</div>
   </ion-content>
-</ion-view>
+</ion-modal-view>

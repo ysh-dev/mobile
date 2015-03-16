@@ -1,0 +1,49 @@
+ <ion-modal-view>
+  <ion-header-bar class="bar-stable" align-title="center">
+		<div class="ysh-header-tab">
+			<div class="button-bar">
+				<a class="button" ng-class="{'button-calm' : loginModal.modus == 'login'}" ng-click="loginModal.showLogin()">登录</a>
+				<a class="button" ng-class="{'button-positive' : loginModal.modus == 'signin'}" ng-click="loginModal.showSignin()">注册</a>
+			</div>
+		</div>
+  		<div class="buttons ysh-right-buttons">
+			<button class="button button-clear" ng-click="loginModal.close()">关闭</button>
+		</div>
+  </ion-header-bar>
+  <ion-content>
+	<div id="login" ng-if="loginModal.modus == 'login'">
+		<form ng-submit="loginModal.doLogin()">
+		  <div class="list">
+			<label class="item item-input">
+			  <span class="input-label">账号</span>
+			  <input type="email" placeholder="手机号码或邮箱" ng-model="loginModal.loginData.username">
+			</label>
+			<label class="item item-input">
+			  <span class="input-label">密码</span>
+			  <input type="password" placeholder="登录密码" ng-model="loginModal.loginData.password">
+			</label>
+			<label class="item">
+			  <button class="button button-block button-calm" type="submit">立刻登录</button>
+			</label>
+		  </div>
+		</form>	
+	</div>
+	<div id="signin" ng-if="loginModal.modus == 'signin'">
+		<form ng-submit="loginModal.doSignin()">
+		  <div class="list">
+			<label class="item item-input">
+			  <span class="input-label">账号</span>
+			  <input type="email" placeholder="手机号码或邮箱" ng-model="loginModal.loginData.username">
+			</label>
+			<label class="item item-input">
+			  <span class="input-label">密码</span>
+			  <input type="password" placeholder="6-20位字母、数字组合" ng-model="loginModal.loginData.password">
+			</label>
+			<label class="item">
+			  <button class="button button-block button-positive" type="submit">立刻注册</button>
+			</label>
+		  </div>
+		</form>	
+	</div>
+  </ion-content>
+</ion-modal-view>

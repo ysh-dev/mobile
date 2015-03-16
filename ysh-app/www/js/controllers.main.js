@@ -4,13 +4,11 @@ angular.module('ysh.controllers.main', ['ysh.utils','ysh.models','ysh.components
 
 
 .controller('AppCtrl', ['$ionicModal', '$scope', 'channelModelProvider', 'adModelProvider', 'memberModelProvider', 'wareModelProvider', '$ionicHistory', 'default_logo', '$rootScope', '$state', '$ionicLoading', 'sessionProvider', function($ionicModal, $scope, channelModelProvider, adModelProvider, memberModelProvider, wareModelProvider, $ionicHistory, default_logo, $rootScope, $state, $ionicLoading, session) {
-  $rootScope.showControls = true;
-  $rootScope.logo = default_logo;
+
   $scope.showDetail = function(id){
 	  $ionicLoading.show({
 		template: 'Loading...'
 	  });
-	  $rootScope.callByMain = true;
 	  $state.go("app.ware", {"wId" : id});
   }
   $scope.toggleStatus = 'newlist';
@@ -51,26 +49,27 @@ angular.module('ysh.controllers.main', ['ysh.utils','ysh.models','ysh.components
   }).then(function(modal) {
 		$scope.modal = modal;
   });
-  $scope.search = {};
-  $scope.closeSearch = function(){
-	  $scope.search.key = '';
-	  $scope.modal.hide();
+  $scope.searchModal = {
+	key : '',
+	hitlist : [],
+	close : function(){
+		this.key = '';
+		$scope.modal.hide();
+	},
+	open : function(){
+		this.hitlist = [];
+		$scope.modal.show(); 
+	},
+	doSearch : function(){
+		$ionicLoading.show({
+			template: 'Searching...'
+		});
+		wareModelProvider.findWaresByTitle(this.key).then(function(data){
+			$ionicLoading.hide();
+			$scope.searchModal.hitlist = wareModelProvider.waresByTitle;
+		});
+	}  
   }
-  
-  $scope.openSearch = function(){
-	$scope.modal.show(); 
-	$scope.hitlist = [];
-  };
-  
-  $scope.doSearch = function(){
-	$ionicLoading.show({
-		template: 'Searching...'
-	});
-	wareModelProvider.findWaresByTitle($scope.search.key).then(function(data){
-		$ionicLoading.hide();
-		$scope.hitlist = wareModelProvider.waresByTitle;
-	});
-  };
 }])
 .controller('ChannelCtrl', ['$scope','$rootScope','$state','$stateParams','brandModelProvider','sessionProvider',function($scope, $rootScope, $state, $stateParams,brandModelProvider,session){
 		var selChannel = $stateParams.cId;
@@ -197,7 +196,7 @@ angular.module('ysh.controllers.main', ['ysh.utils','ysh.models','ysh.components
 		};
 		
 }])
-.controller('DealerCtrl', ['$scope', '$state', function($scope, $state){
+.controller('DealerCtrl', ['$scope', '$ionicPopover', '$state', function($scope, $ionicPopover, $state){
 		$scope.cancel = function(){
 			$state.go("app.dealerteaser");
 		};

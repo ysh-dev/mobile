@@ -10,7 +10,7 @@
         </button>
       </ion-nav-buttons>
 	  <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-search" ng-click="openSearch()">
+        <button class="button button-icon button-clear ion-search" ng-click="searchModal.open()">
 		</button>
       </ion-nav-buttons>
     </ion-nav-bar>
@@ -30,8 +30,9 @@
 		<ion-item nav-clear menu-close ng-repeat="channel in channels" ui-sref="app.channel({cId:channel.id})">
 			<span class="ysh-bold-font">{{channel.title}}</span>
 		</ion-item>
-        <ion-item nav-clear menu-close ui-sref="member.login">
+        <ion-item nav-clear menu-close ng-click="loginModal.open()">
           <span class="ysh-bold-font">我的</span>
+		  <i class="icon ion-person"></i>
         </ion-item>
       </ion-list>
     </ion-content>

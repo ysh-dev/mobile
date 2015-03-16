@@ -109,6 +109,13 @@ img.ysh-logo {
 	border-color: grey;
 }
 .ysh-header-tab{
-	width:70%;
+	text-align:center;
 	margin: 0 auto;
+	min-width: 50%
+}
+.ysh-right-buttons{
+	z-index: 10;
+	position: absolute;
+	right: inherit;
+	padding-right: inherit;
 }

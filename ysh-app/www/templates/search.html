@@ -2,19 +2,19 @@
    <ion-header-bar class="bar-stable bar-calm" align-title="center">
     <h1 class="title">搜索</h1>
     <div class="buttons">
-      <button class="button button-clear" ng-click="closeSearch()">关闭</button>
+      <button class="button button-clear" ng-click="searchModal.close()">关闭</button>
     </div>
   </ion-header-bar>
   <ion-content>
 	<div class="bar bar-header item-input-inset">
 		<label class="item-input-wrapper">
 			<i class="icon ion-search placeholder-icon"></i>
-			<input type="search" placeholder="商品名称" ng-model="search.key">
+			<input type="search" placeholder="商品名称" ng-model="searchModal.key">
 		</label>
-		<button class="button button-clear" ng-click="doSearch()">查找</button>
+		<button class="button button-clear" ng-click="searchModal.doSearch()">查找</button>
 	</div>
 	<ion-list>
-      <ion-item nav-clear menu-close ng-repeat="hit in hitlist" ui-sref="app.ware({wId:hit.id})" ng-click="closeSearch()">
+      <ion-item nav-clear menu-close ng-repeat="hit in searchModal.hitlist" ui-sref="app.ware({wId:hit.id})" ng-click="searchModal.close()">
         <span>{{hit.title}}</span>
       </ion-item>
     </ion-list>

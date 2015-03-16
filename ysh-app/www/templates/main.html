@@ -7,7 +7,7 @@
 		</div>
   </ion-header-bar>
   <ion-content lazy-scroll>
-	<div id="newlist" ng-if="toggleStatus == 'newlist'">
+	<div id="newlist" ng-show="toggleStatus == 'newlist'">
 		<ion-list>
 			<ion-item ng-repeat="ad in newAds|orderBy:'id'">
 				<div ng-click="showDetail('w_01')">
@@ -16,7 +16,7 @@
 			</ion-item>
 		</ion-list>
 	</div>
-	<div id="hotlist" ng-if="toggleStatus == 'hotlist'">
+	<div id="hotlist" ng-show="toggleStatus == 'hotlist'">
 		<ion-list>
 			<ion-item ng-repeat="ad in hotAds|orderBy:'id'">
 				<div ng-click="showDetail('w_01')">

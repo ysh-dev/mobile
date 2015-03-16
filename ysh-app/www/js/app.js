@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('ysh', ['ionic', 'ysh.controllers.main', 'ysh.controllers.member', 'ysh.models'])
+angular.module('ysh', ['ionic', 'ysh.controllers.main', 'ysh.controllers.member', 'ysh.models', 'ysh.config'])
 
-.run(function($ionicPlatform, $ionicModal, $rootScope, $log, sessionProvider, memberModelProvider) {
+.run(function($ionicPlatform, $ionicModal, $rootScope, $state, $log, sessionProvider, memberModelProvider, default_logo) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -14,6 +14,43 @@ angular.module('ysh', ['ionic', 'ysh.controllers.main', 'ysh.controllers.member'
       StatusBar.styleDefault();
     }
   });
+  $rootScope.showControls = true;
+  $rootScope.logo = default_logo;
+  
+  //initialize login modal
+  $ionicModal.fromTemplateUrl('templates/login.html', {
+		scope: $rootScope
+  }).then(function(modal) {
+		$rootScope.modal = modal;
+  });
+  
+  $rootScope.loginModal = {
+	  loginData : {},
+	  modus : 'login', //login|signin
+	  showLogin : function(){
+		this.modus = 'login';
+	  },
+	  showSignin : function(){
+		this.modus = 'signin';
+	  },
+	  close : function(){
+		$rootScope.modal.hide();
+	  },
+	  open : function(){
+		$rootScope.modal.show(); 
+	  },
+	  doLogin : function() {
+		memberModelProvider.login(this.loginData.username, this.loginData.password).then(function(data){
+			if(memberModelProvider.loginStatus){
+				sessionProvider.put('credential', this.loginData);
+				$rootScope.loginModal.close();
+				$state.go('app.member');
+			}else{
+				$log.info('login failed');
+			}
+		});
+	  }
+  };
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -79,6 +116,15 @@ angular.module('ysh', ['ionic', 'ysh.controllers.main', 'ysh.controllers.member'
 		}
 	  }
     })
+	.state('app.member', {
+      url: "/member",
+      views: {
+        'menuContent': {
+			templateUrl: "templates/member/main.html",
+			controller : 'MemberCtrl'
+		}
+      }
+    })
 	//dealership states
 	.state('dealer', {
 		url: "/dealer",
@@ -91,21 +137,6 @@ angular.module('ysh', ['ionic', 'ysh.controllers.main', 'ysh.controllers.member'
         'surveyContent': {
 			templateUrl: "templates/dealer/survey.html",
 			controller : 'DealerCtrl'
-		}
-      }
-    })
-	//user center states
-	.state('member',{
-		url : "member",
-		abstract: true,
-		templateUrl: "templates/member/main.html",
-	})
-	.state('member.login', {
-      url: "/login",
-      views: {
-        'memberContent': {
-			templateUrl: "templates/member/login.html",
-			controller : 'MemberCtrl'
 		}
       }
     });
